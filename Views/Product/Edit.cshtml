@@ -1,0 +1,45 @@
+@model GeneralStoreMVC.Models.Product.ProductEditVM
+@{
+    string title = $"Edit {Model.Name}";
+    ViewData["Title"] = title;
+}
+
+<h1 class="display-4">@title</h1>
+@if (TempData["ErrorMsg"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>ERROR:</strong> @TempData["ErrorMsg"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<form asp-action="Edit" class="row g-3">
+    <input asp-for="Id" hidden>
+    <div class="col-md-4">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="Price" class="form-label"></label>
+        <input asp-for="Price" class="form-control">
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="QuantityInStock" class="form-label"></label>
+        <input asp-for="QuantityInStock" class="form-control">
+        <span asp-validation-for="QuantityInStock" class="text-danger"></span>
+    </div>
+    <div class="d-flex justify-content-between align-items-baseline">
+        <a asp-action="Index" class="">Back to List</a>
+        <input type="submit" value="Update" class="btn btn-primary">
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

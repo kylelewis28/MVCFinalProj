@@ -1,0 +1,24 @@
+@model GeneralStoreMVC.Models.Transaction.TransactionCreateVM
+@{
+    ViewData["Title"] = "Create Transaction";
+    var productList = ViewData["Products"] as List<SelectListItem>;
+}
+
+<h1 class="display-4">Create Transaction</h1>
+
+<form asp-action="Create" method="post" class="row g-3">
+    <div class="col-sm-9">
+        <label asp-for="ProductId"></label>
+        <select asp-for="ProductId" asp-items="productList" class="form-select">
+            <option selected hidden value="-1">-- Select Item --</option>
+        </select>
+    </div>
+    <div class="col-sm-3">
+        <label asp-for="Quantity"></label>
+        <input asp-for="Quantity" min="1" max="100" class="form-control" />
+    </div>
+    <div class="d-flex justify-content-between align-items-baseline">
+        <a asp-controller="Customer" asp-action="Details" asp-route-id="@Model.CustomerId">Back to Customer</a>
+        <input type="submit" value="Confirm" class="btn btn-primary" asp-route-customerId="@Model.CustomerId">
+    </div>
+</form>
